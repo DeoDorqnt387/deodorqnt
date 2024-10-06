@@ -46,11 +46,20 @@
             <i class="fab fa-steam">&nbsp;</i>Steam
         </a>
     </div>
-    <h4 align="center">PLAYING: 残響散歌 (Zankyosanka) - Aimer // covered by 凪原涼菜</h4>
-    <audio autoplay>
+    <audio autoplay id="myAudio">
         <source src="audio/zankyosanka.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <script>
+        document.addEventListener('click', function() {
+            var audio = document.getElementById('myAudio');
+            audio.play().catch(function(error) {
+                console.log('Playback prevented:', error);
+            });
+            document.removeEventListener('click', arguments.callee);
+        });
+    </script>
 </body>
 
 </html>
