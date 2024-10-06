@@ -23,9 +23,7 @@
     <div class="description">
         For bretonnia - For the Queen
     </div>
-    <h1 align="center">
-        <img width="200px"src="./images/chika.gif" alt="Backloggd Picture">
-    </h1>
+
     <div class="links">
         <a class="link" href="https://www.youtube.com/@nor-on" target="_blank">
             <i class="fab fa-youtube">&nbsp;</i>Youtube
@@ -46,17 +44,38 @@
             <i class="fab fa-steam">&nbsp;</i>Steam
         </a>
     </div>
-    <audio autoplay loop id="myAudio">
+    <audio id="myAudio" autoplay loop>
         <source src="audio/zankyosanka.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+    <video id="myVideo" autoplay loop muted>
+        <source src="audio/background.mp4" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
 
     <script>
         document.addEventListener('click', function() {
             var audio = document.getElementById('myAudio');
-            audio.play().catch(function(error) {
+            var video = document.getElementById('myVideo');
+    
+            audio.play().then(() => {
+                video.style.display = 'block'; // Show the video
+                video.play(); // Play the video
+    
+                // Change the color of the buttons to white
+                const links = document.querySelectorAll('.link');
+                links.forEach(link => {
+                    link.style.color = 'white'; // Set button text color to white
+                    link.style.borderColor = 'white'; // Change border color to white if needed
+                });
+
+                document.querySelector('.userName').style.color = 'white';
+                document.querySelector('.description').style.color = 'white';
+            }).catch(function(error) {
                 console.log('Playback prevented:', error);
             });
+    
+            // Remove the event listener after the first click to prevent multiple plays
             document.removeEventListener('click', arguments.callee);
         });
     </script>
